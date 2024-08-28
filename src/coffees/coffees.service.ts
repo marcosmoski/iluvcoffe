@@ -16,6 +16,7 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly dataSource: DataSource,
+    // non class based provider @Inject('COFFEE_BRANDS') coffeeBrands: string[],
   ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {
