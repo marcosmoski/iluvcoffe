@@ -27,9 +27,10 @@ export class CoffeesController {
   // @UsePipes(ValidationPipe)
   @Get('')
   @Public()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     // const { limit, offset } = paginationQuery;
-    return this.coffeesService.findAll(paginationQuery);
+
     //return `This action returns all coffes. Limit: ${limit} Offset: ${offset} `;
   }
 
