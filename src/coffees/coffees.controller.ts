@@ -8,10 +8,10 @@ import {
   Post,
   Put,
   Query,
-  SetMetadata,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -26,7 +26,7 @@ export class CoffeesController {
 
   // @UsePipes(ValidationPipe)
   @Get('')
-  @SetMetadata('isPublic', true)
+  @Public()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     // const { limit, offset } = paginationQuery;
     return this.coffeesService.findAll(paginationQuery);
