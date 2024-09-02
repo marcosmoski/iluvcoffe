@@ -6,7 +6,6 @@ import {
   Param,
   Patch,
   Post,
-  Put,
   Query,
   UsePipes,
   ValidationPipe,
@@ -47,9 +46,6 @@ export class CoffeesController {
     console.log(createCoffeeDto instanceof CreateCoffeeDto);
     return this.coffeesService.create(createCoffeeDto);
   }
-
-  @Put()
-  replace() {}
 
   @Patch(':id')
   update(
