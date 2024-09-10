@@ -1,6 +1,6 @@
-import { Coffee } from 'src/coffees/entities/coffee.entity';
-import { Flavor } from 'src/coffees/entities/flavor.entity';
-import { CoffeeRefactor1724790241104 } from 'src/migration/1724790241104-CoffeeRefactor';
+import { Coffee } from '@src/coffees/entities/coffee.entity';
+import { Flavor } from '@src/coffees/entities/flavor.entity';
+import { CoffeeRefactor1724790241104 } from '@src/migration/1724790241104-CoffeeRefactor';
 import { DataSource } from 'typeorm';
 
 export default new DataSource({

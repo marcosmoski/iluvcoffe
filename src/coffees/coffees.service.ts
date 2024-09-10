@@ -1,7 +1,7 @@
 import { Inject, NotFoundException } from '@nestjs/common';
 import { ConfigService, ConfigType } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { PaginationQueryDto } from '@src/common/dto/pagination-query.dto';
 import { DataSource, Repository } from 'typeorm';
 import { Event } from '../events/entities/event.entity';
 import coffeesConfig from './config/coffees.config';
@@ -21,11 +21,7 @@ export class CoffeesService {
     @Inject(coffeesConfig.KEY)
     private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
     // non class based provider @Inject('COFFEE_BRANDS') coffeeBrands: string[],
-  ) {
-    // console.log('Coffeservice');
-    const dbHost = this.coffeesConfiguration.foo;
-    console.log(dbHost);
-  }
+  ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {
     return this.coffeeRepository.find({
@@ -109,8 +105,8 @@ export class CoffeesService {
       await queryRunner.manager.save(coffee);
       await queryRunner.manager.save(reccomendEvent);
     } catch (err) {
-      console.error(err);
       await queryRunner.rollbackTransaction();
+      throw new NotFoundException(err);
     } finally {
       await queryRunner.release();
     }
