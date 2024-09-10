@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
@@ -59,7 +60,17 @@ describe('CoffeesService', () => {
       });
     });
     describe('otherwise', () => {
-      it('should throw the NotFoundException', async () => {});
+      it('should throw the NotFoundException', async () => {
+        const coffeeId = '1';
+        coffeRepository.findOne.mockReturnValue(undefined);
+        try {
+          await service.findOne(coffeeId);
+          expect(false).toBeTruthy();
+        } catch (err) {
+          expect(err).toBeInstanceOf(NotFoundException);
+          expect(err.message).toEqual(`Coffee #${coffeeId} not found`);
+        }
+      });
     });
   });
 });
